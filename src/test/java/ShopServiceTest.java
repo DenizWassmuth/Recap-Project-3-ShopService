@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 
+import java.lang.classfile.ClassFile;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,15 @@ class ShopServiceTest {
     @Test
     void getOrdersByOrderStatus_returnNull() {
         ShopService shopService = new ShopService();
-        assertEquals(null, shopService.getOrdersByOrderStatus(OrderStatus.PROCESSING));
+
+        Order order1 = new Order("1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);
+        Order order2 = new Order("1", List.of(new Product("2", "Birne")), OrderStatus.PROCESSING);
+        shopService.addOrderDirectlyToOrderRepo(order1);
+        shopService.addOrderDirectlyToOrderRepo(order2);
+
+        List<Order> actual = shopService.getOrdersByOrderStatus(OrderStatus.PROCESSING);
+
+        OrderStatus expectedStatus = OrderStatus.PROCESSING;
+        assertEquals(expectedStatus, actual.getFirst().orderStatus());
     }
 }

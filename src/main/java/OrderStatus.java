@@ -5,8 +5,8 @@ public enum OrderStatus {
     COMPLETED("completed");
 
     private String value;
-    OrderStatus(String description) {
-        this.value = description;
+    OrderStatus(String value) {
+        this.value = value;
     }
     public String getValue() {
         return value;

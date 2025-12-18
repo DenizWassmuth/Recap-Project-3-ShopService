@@ -37,7 +37,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void getOrdersByOrderStatus_returnNull() {
+    void getOrdersByOrderStatus_passesWhenOrderStatusEqualsFirstOrderListsElementOrderStatus() {
         ShopService shopService = new ShopService();
 
         Order order1 = new Order("1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);

@@ -1,12 +1,21 @@
+import lombok.RequiredArgsConstructor;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 public class ShopService {
-    private ProductRepo productRepo = new ProductRepo();
-    private OrderRepo orderRepo = new OrderMapRepo();
+
+private ProductRepo productRepo;
+private OrderRepo orderRepo;
+
+    public ShopService(ProductRepo productRepo, OrderMapRepo orderMapRepo) {
+        this.productRepo = productRepo;
+        this.orderRepo = orderMapRepo;
+    }
 
     public Order addOrder(List<String> productIds) {
         List<Product> products = new ArrayList<>();

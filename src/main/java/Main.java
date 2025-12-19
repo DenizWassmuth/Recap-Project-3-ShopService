@@ -14,5 +14,12 @@ public class Main {
         if (newOrder1.equals(newOrder2)) {
             System.out.println("Orders are equal");
         }
+
+        ProductRepo productRepo = new ProductRepo();
+        OrderMapRepo orderMapRepo = new OrderMapRepo();
+
+        ShopService shopService = new ShopService(productRepo, orderMapRepo);
+
+
     }
 }

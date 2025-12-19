@@ -1,8 +1,8 @@
 
-import java.util.Random;
+import java.util.UUID;
 
 public class IdService {
     String generateRandomId() {
-        return null;
+        return UUID.randomUUID().toString();
     }
 }

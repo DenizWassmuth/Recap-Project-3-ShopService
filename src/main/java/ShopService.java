@@ -13,6 +13,13 @@ public class ShopService {
 
     private final ProductRepo productRepo;
     private final OrderRepo orderRepo;
+    private final IdService idService;
+
+    public ShopService(){
+        this.productRepo = new ProductRepo();
+        this.orderRepo = new OrderMapRepo();
+        this.idService = new IdService();
+    }
 
     public Order addOrder(List<String> productIds) {
         List<Product> products = new ArrayList<>();
@@ -27,7 +34,7 @@ public class ShopService {
             }
         }
 
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING, Instant.now());
+        Order newOrder = new Order(idService.generateRandomId(), products, OrderStatus.PROCESSING, Instant.now());
 
         return orderRepo.addOrder(newOrder);
     }
@@ -58,6 +65,6 @@ public class ShopService {
             throw new ProductDoesNotExistException();
         }
 
-        return null;
+        throw new ProductDoesNotExistException();
     }
 }

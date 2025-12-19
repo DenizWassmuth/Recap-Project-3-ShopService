@@ -16,7 +16,6 @@ public class ShopService {
     public Order addOrder(List<String> productIds) {
         List<Product> products = new ArrayList<>();
         for (String productId : productIds) {
-
             try {
                 Product productToOrder = productRepo.getProductById(productId);
                 //if (productToOrder == null) {
@@ -28,8 +27,8 @@ public class ShopService {
                 products.add(productToOrder);
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
-                return null;
+                //return null;
+                throw new ProductDoesNotExistException();
             }
         }
 

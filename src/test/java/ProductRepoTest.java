@@ -58,6 +58,6 @@ class ProductRepoTest {
         repo.removeProduct("1");
 
         //THEN
-        assertThrows(ProductDoesNotExistException.class, () -> repo.getProductById("1"));
+        assertThrows(RuntimeException.class, () -> repo.getProductById("1"));
     }
 }

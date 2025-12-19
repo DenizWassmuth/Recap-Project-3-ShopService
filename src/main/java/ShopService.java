@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class ShopService {
@@ -38,6 +39,14 @@ public class ShopService {
     }
 
     public Order updateOrder(String orderId, OrderStatus orderStatus){
-        return null;
+
+        Optional<Order> optionalOrder = orderRepo.getOrderById(orderId);
+        if (optionalOrder.isPresent()) {
+            Order orderToUpdate = optionalOrder.get();
+            orderRepo.removeOrder(orderId);
+            return orderRepo.addOrder(orderToUpdate.withOrderStatus(orderStatus));
+        }
+
+        throw new ProductDoesNotExistException();
     }
 }

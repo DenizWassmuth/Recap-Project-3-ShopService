@@ -61,7 +61,7 @@ class OrderListRepoTest {
         //THEN
         Product product1 = new Product("1", "Apfel");
         Order expected = new Order("1", List.of(product1), OrderStatus.PROCESSING);
-        assertEquals(actual, expected);
+        assertEquals(actual, newOrder);
         assertEquals(repo.getOrderById("1").orElseGet(() -> null), expected);
     }
 

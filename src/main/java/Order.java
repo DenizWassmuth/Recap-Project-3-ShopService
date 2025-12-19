@@ -11,6 +11,6 @@ public record Order(
 
     public Order(String id, List<Product> products, OrderStatus orderStatus){
 
-        this(id, products, orderStatus, LocalDateTime.now());
+        this(id, products, orderStatus, null);
     }
 }

@@ -25,6 +25,7 @@ class OrderMapRepoTest {
         List<Order> expected = new ArrayList<>();
         Product product1 = new Product("1", "Apfel");
         expected.add(new Order("1", List.of(product1), OrderStatus.PROCESSING));
+        //expected.add(newOrder);
 
         assertEquals(actual, expected);
     }

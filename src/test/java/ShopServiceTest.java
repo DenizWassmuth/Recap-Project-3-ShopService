@@ -30,10 +30,12 @@ class ShopServiceTest {
         List<String> productsIds = List.of("1", "2");
 
         //WHEN
-        Order actual = shopService.addOrder(productsIds);
+        //Order actual = shopService.addOrder(productsIds);
 
         //THEN
-        assertNull(actual);
+        //assertNull(actual);
+
+        assertThrows(ProductDoesNotExistException.class, () -> shopService.addOrder(productsIds));
     }
 
     @Test

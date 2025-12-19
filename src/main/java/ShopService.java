@@ -18,16 +18,10 @@ public class ShopService {
         for (String productId : productIds) {
             try {
                 Product productToOrder = productRepo.getProductById(productId);
-                //if (productToOrder == null) {
-                //    throw new ProductDoesNotExistException();
-                //   System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
-                //    return null;
-                //     }
-
                 products.add(productToOrder);
 
             } catch (Exception e) {
-                //return null;
+
                 throw new ProductDoesNotExistException();
             }
         }
@@ -52,13 +46,17 @@ public class ShopService {
 
     public Order updateOrder(String orderId, OrderStatus orderStatus){
 
-        Optional<Order> optionalOrder = orderRepo.getOrderById(orderId);
-        if (optionalOrder.isPresent()) {
-            Order orderToUpdate = optionalOrder.get();
-            orderRepo.removeOrder(orderId);
-            return orderRepo.addOrder(orderToUpdate.withOrderStatus(orderStatus));
+        try{
+            Optional<Order> optionalOrder = orderRepo.getOrderById(orderId);
+            if (optionalOrder.isPresent()) {
+                Order orderToUpdate = optionalOrder.get();
+                orderRepo.removeOrder(orderId);
+                return orderRepo.addOrder(orderToUpdate.withOrderStatus(orderStatus));
+            }
+        }catch (Exception e){
+            throw new ProductDoesNotExistException();
         }
 
-        throw new NullPointerException("Order with id " + orderId + " not found");
+        return null;
     }
 }

@@ -27,12 +27,6 @@ class ShopServiceTest {
         ShopService shopService = new ShopService(new ProductRepo(), new OrderMapRepo());
         List<String> productsIds = List.of("2", "3");
 
-        //WHEN
-        //Order actual = shopService.addOrder(productsIds);
-
-        //THEN
-        //assertNull(actual);
-
         assertThrows(Exception.class, () -> shopService.addOrder(productsIds));
     }
 
@@ -40,12 +34,9 @@ class ShopServiceTest {
     void getOrdersByOrderStatus_passesWhenOrderStatusEqualsFirstOrderListsElementOrderStatus() {
 
         // Given
-        Order order1 = new Order("1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);
-        Order order2 = new Order("1", List.of(new Product("1", "Birne")), OrderStatus.PROCESSING);
-
         ShopService shopService = new ShopService(new ProductRepo(), new OrderMapRepo());
-        shopService.addOrderDirectlyToOrderRepo(order1);
-        shopService.addOrderDirectlyToOrderRepo(order2);
+        List<String> productsIds = List.of("1");
+        shopService.addOrder(productsIds);
 
         // When
         OrderStatus expectedStatus = OrderStatus.PROCESSING;
@@ -68,14 +59,13 @@ class ShopServiceTest {
     @Test
     void updateOrder_doesNotThrowException(){
         ShopService shopService = new ShopService(new ProductRepo(), new OrderMapRepo());
-
-        Order newOrder = new Order("1", List.of(new Product("1", "Birne")), OrderStatus.PROCESSING);
-        shopService.addOrderDirectlyToOrderRepo(newOrder);
+        Order newOrder = shopService.addOrder(List.of("1"));
+        String orderId = newOrder.id();
 
         Order expectedUpdatedOrder = newOrder.withOrderStatus(OrderStatus.IN_DELIVERY);
-        Order actualUpdatedOrder = shopService.updateOrder("1", OrderStatus.IN_DELIVERY);
+        Order actualUpdatedOrder = shopService.updateOrder(orderId, OrderStatus.IN_DELIVERY);
 
-        assertDoesNotThrow(() -> shopService.updateOrder("1", OrderStatus.IN_DELIVERY));
+        assertDoesNotThrow(() -> shopService.updateOrder(orderId, OrderStatus.IN_DELIVERY));
         assertEquals(expectedUpdatedOrder, actualUpdatedOrder);
     }
 }

@@ -22,12 +22,12 @@ public class ShopService {
         return orderRepo.addOrder(newOrder);
     }
 
-    public List<Order> getOrdersByOrderStatus(OrderStatus orderStatus) {
-        return orderRepo.getOrders().stream().filter(order -> order.orderStatus() == orderStatus).toList();
-    }
-
     public List<Order> getOrders() {
         return orderRepo.getOrders();
+    }
+
+    public List<Order> getOrdersByOrderStatus(OrderStatus orderStatus) {
+        return orderRepo.getOrders().stream().filter(order -> order.orderStatus() == orderStatus).toList();
     }
 
     public void addOrderDirectlyToOrderRepo(Order order)

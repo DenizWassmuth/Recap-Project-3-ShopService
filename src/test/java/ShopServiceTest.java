@@ -41,7 +41,7 @@ class ShopServiceTest {
 
         // Given
         Order order1 = new Order("1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);
-        Order order2 = new Order("1", List.of(new Product("2", "Birne")), OrderStatus.PROCESSING);
+        Order order2 = new Order("1", List.of(new Product("1", "Birne")), OrderStatus.PROCESSING);
 
         ShopService shopService = new ShopService();
         shopService.addOrderDirectlyToOrderRepo(order1);

@@ -23,9 +23,12 @@ public class Main {
 
         OrderMapRepo orderMapRepo = new OrderMapRepo();
 
+        IdService idService = new IdService();
+
         ShopService shopService = ShopService.builder()
                 .productRepo(productRepo)
                 .orderRepo(orderMapRepo)
+                .idService(idService)
                 .build();
 
         List<String> firstOrder = List.of("1", "2", "3", "4");

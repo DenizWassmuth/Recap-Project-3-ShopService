@@ -50,7 +50,7 @@ class ProductRepoTest {
     }
 
     @org.junit.jupiter.api.Test
-    void removeProduct() {
+    void removeProduct_throwsException_whenNoEntryInRepo() {
         //GIVEN
         ProductRepo repo = new ProductRepo();
 
@@ -58,6 +58,6 @@ class ProductRepoTest {
         repo.removeProduct("1");
 
         //THEN
-        assertNull(repo.getProductById("1"));
+        assertThrows(ProductDoesNotExistException.class, () -> repo.getProductById("1"));
     }
 }

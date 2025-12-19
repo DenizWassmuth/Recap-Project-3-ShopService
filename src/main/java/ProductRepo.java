@@ -14,6 +14,11 @@ public class ProductRepo {
     }
 
     public Product getProductById(String id) {
+
+        if (products.isEmpty()){
+            throw new RuntimeException("ProductRepo is empty");
+        }
+
         for (Product product : products) {
             if (product.id().equals(id)) {
                 return product;

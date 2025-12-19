@@ -18,7 +18,10 @@ public class Main {
         ProductRepo productRepo = new ProductRepo();
         OrderMapRepo orderMapRepo = new OrderMapRepo();
 
-        ShopService shopService = new ShopService(productRepo, orderMapRepo);
+        ShopService shopService = ShopService.builder()
+                .productRepo(productRepo)
+                .orderRepo(orderMapRepo)
+                .build();
 
 
     }

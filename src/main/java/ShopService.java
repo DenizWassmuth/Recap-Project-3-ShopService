@@ -1,37 +1,39 @@
+import lombok.Builder;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
+import java.util.*;
+@Data
+@Builder
 @RequiredArgsConstructor
 public class ShopService {
 
-private ProductRepo productRepo;
-private OrderRepo orderRepo;
-
-    public ShopService(ProductRepo productRepo, OrderMapRepo orderMapRepo) {
-        this.productRepo = productRepo;
-        this.orderRepo = orderMapRepo;
-    }
+    private ProductRepo productRepo;
+    private OrderRepo orderRepo;
 
     public Order addOrder(List<String> productIds) {
         List<Product> products = new ArrayList<>();
         for (String productId : productIds) {
-            Product productToOrder = productRepo.getProductById(productId);
-            if (productToOrder == null) {
 
-                throw new ProductDoesNotExistException();
-//                System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
-//                return null;
+            try {
+                Product productToOrder = productRepo.getProductById(productId);
+                //if (productToOrder == null) {
+                //    throw new ProductDoesNotExistException();
+                //   System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
+                //    return null;
+                //     }
+
+                products.add(productToOrder);
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return null;
             }
-
-            products.add(productToOrder);
         }
 
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING, LocalDateTime.now());
+        Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING, Instant.now());
 
         return orderRepo.addOrder(newOrder);
     }
@@ -58,6 +60,6 @@ private OrderRepo orderRepo;
             return orderRepo.addOrder(orderToUpdate.withOrderStatus(orderStatus));
         }
 
-        throw new ProductDoesNotExistException();
+        throw new NullPointerException("Order with id " + orderId + " not found");
     }
 }

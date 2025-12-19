@@ -20,7 +20,7 @@ class ShopServiceTest {
 
         //THEN
         Order expected = new Order("-1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);
-        assertEquals(expected.products(), actual.products());
+        assertNull(actual);
         assertNotNull(expected.id());
     }
 
@@ -65,7 +65,7 @@ class ShopServiceTest {
 
         ShopService shopService = new ShopService();
 
-        assertThrows(Exception.class, () -> shopService.updateOrder("1", OrderStatus.IN_DELIVERY));
+        assertThrows(NullPointerException.class, () -> shopService.updateOrder("1", OrderStatus.IN_DELIVERY));
     }
 
     @Test

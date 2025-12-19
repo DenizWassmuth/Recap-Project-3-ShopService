@@ -19,7 +19,8 @@ public class ProductRepo {
                 return product;
             }
         }
-        return null;
+
+        throw new ProductDoesNotExistException();
     }
 
     public Product addProduct(Product newProduct) {

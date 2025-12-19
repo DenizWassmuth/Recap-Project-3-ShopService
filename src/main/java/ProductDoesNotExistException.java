@@ -1,4 +1,4 @@
-public class ProductDoesNotExistException extends RuntimeException {
+public class ProductDoesNotExistException extends NullPointerException {
     public ProductDoesNotExistException(String message) {
         super(message);
     }

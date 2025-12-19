@@ -23,10 +23,11 @@ private OrderRepo orderRepo;
             Product productToOrder = productRepo.getProductById(productId);
             if (productToOrder == null) {
 
-                throw new ProductDoesNotExistException("Product does not exist");
-                //System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
-                //return null;
+                throw new ProductDoesNotExistException();
+//                System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
+//                return null;
             }
+
             products.add(productToOrder);
         }
 

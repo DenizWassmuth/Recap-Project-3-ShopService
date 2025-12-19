@@ -44,7 +44,7 @@ class OrderListRepoTest {
         Product product1 = new Product("1", "Apfel");
         Order expected = new Order("1", List.of(product1), OrderStatus.PROCESSING);
 
-        assertEquals(actual.get(), expected);
+        assertEquals(actual.orElseGet(() -> null), expected);
     }
 
     @Test
@@ -61,7 +61,7 @@ class OrderListRepoTest {
         Product product1 = new Product("1", "Apfel");
         Order expected = new Order("1", List.of(product1), OrderStatus.PROCESSING);
         assertEquals(actual, expected);
-        assertEquals(repo.getOrderById("1"), expected);
+        assertEquals(repo.getOrderById("1").orElseGet(() -> null), expected);
     }
 
     @Test
@@ -73,6 +73,6 @@ class OrderListRepoTest {
         repo.removeOrder("1");
 
         //THEN
-        assertNull(repo.getOrderById("1"));
+        assertNull(repo.getOrderById("1").orElseGet(() -> null));
     }
 }

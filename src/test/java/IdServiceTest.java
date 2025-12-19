@@ -7,6 +7,6 @@ class IdServiceTest {
     @Test
     void generateRandomId() {
         IdService idService = new IdService();
-        assertNull(idService.generateRandomId());
+        assertNotNull(idService.generateRandomId());
     }
 }

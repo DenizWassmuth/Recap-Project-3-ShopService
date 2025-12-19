@@ -53,11 +53,11 @@ class ShopServiceTest {
         // When
         OrderStatus expectedStatus = OrderStatus.PROCESSING;
 
-        List<Order> actual = shopService.getOrdersByOrderStatus(expectedStatus);
-        OrderStatus actualOrderStatus = actual.getFirst().orderStatus();
+        List<Order> actualOrder = shopService.getOrdersByOrderStatus(expectedStatus);
+        OrderStatus actualStatus = actualOrder.getFirst().orderStatus();
 
         // Then
-        assertEquals(expectedStatus, actualOrderStatus);
+        assertEquals(expectedStatus, actualStatus);
     }
 
     @Test

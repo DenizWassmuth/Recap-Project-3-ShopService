@@ -1,3 +1,4 @@
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -5,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Order newOrder1 = new Order("1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING, LocalDateTime.now());
+        Order newOrder1 = new Order("1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING, Instant.now());
         System.out.println(newOrder1.timeStamp());
 
         Order newOrder2 = new Order("1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);

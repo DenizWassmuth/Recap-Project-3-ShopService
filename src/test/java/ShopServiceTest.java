@@ -12,7 +12,7 @@ class ShopServiceTest {
     @Test
     void addOrderTest() {
         //GIVEN
-        ShopService shopService = new ShopService();
+        ShopService shopService = new ShopService(new ProductRepo(), new OrderMapRepo());
         List<String> productsIds = List.of("1");
 
         //WHEN
@@ -27,7 +27,7 @@ class ShopServiceTest {
     @Test
     void addOrderTest_whenInvalidProductId_throwsProductDoesNotExistException() {
         //GIVEN
-        ShopService shopService = new ShopService();
+        ShopService shopService = new ShopService(new ProductRepo(), new OrderMapRepo());
         List<String> productsIds = List.of("1", "2");
 
         //WHEN
@@ -46,7 +46,7 @@ class ShopServiceTest {
         Order order1 = new Order("1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);
         Order order2 = new Order("1", List.of(new Product("1", "Birne")), OrderStatus.PROCESSING);
 
-        ShopService shopService = new ShopService();
+        ShopService shopService = new ShopService(new ProductRepo(), new OrderMapRepo());
         shopService.addOrderDirectlyToOrderRepo(order1);
         shopService.addOrderDirectlyToOrderRepo(order2);
 
@@ -63,14 +63,14 @@ class ShopServiceTest {
     @Test
     void updateOrder_throwsOrderDoesNotExistException() {
 
-        ShopService shopService = new ShopService();
+        ShopService shopService = new ShopService(new ProductRepo(), new OrderMapRepo());
 
         assertThrows(NullPointerException.class, () -> shopService.updateOrder("1", OrderStatus.IN_DELIVERY));
     }
 
     @Test
     void updateOrder_doesNotThrowException(){
-        ShopService shopService = new ShopService();
+        ShopService shopService = new ShopService(new ProductRepo(), new OrderMapRepo());
 
         Order newOrder = new Order("1", List.of(new Product("1", "Birne")), OrderStatus.PROCESSING);
         shopService.addOrderDirectlyToOrderRepo(newOrder);

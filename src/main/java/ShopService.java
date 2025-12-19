@@ -10,8 +10,8 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ShopService {
 
-    private ProductRepo productRepo;
-    private OrderRepo orderRepo;
+    private final ProductRepo productRepo;
+    private final OrderRepo orderRepo;
 
     public Order addOrder(List<String> productIds) {
         List<Product> products = new ArrayList<>();

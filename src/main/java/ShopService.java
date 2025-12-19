@@ -36,4 +36,8 @@ public class ShopService {
     {
         orderRepo.addOrder(order);
     }
+
+    public Order updateOrder(String orderId, OrderStatus orderStatus){
+        return null;
+    }
 }

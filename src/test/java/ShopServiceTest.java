@@ -58,4 +58,16 @@ class ShopServiceTest {
         // Then
         assertEquals(expectedStatus, actualOrderStatus);
     }
+
+    @Test
+    void updateOrder_expectNull(){
+
+        ShopService shopService = new ShopService();
+        Order actual = shopService.updateOrder("1", OrderStatus.IN_DELIVERY);
+
+        Order expected = null;
+
+        assertEquals(expected, actual);
+        assertNull(actual);
+    }
 }

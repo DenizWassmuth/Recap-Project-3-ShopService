@@ -38,16 +38,22 @@ class ShopServiceTest {
 
     @Test
     void getOrdersByOrderStatus_passesWhenOrderStatusEqualsFirstOrderListsElementOrderStatus() {
-        ShopService shopService = new ShopService();
 
+        // Given
         Order order1 = new Order("1", List.of(new Product("1", "Apfel")), OrderStatus.PROCESSING);
         Order order2 = new Order("1", List.of(new Product("2", "Birne")), OrderStatus.PROCESSING);
+
+        ShopService shopService = new ShopService();
         shopService.addOrderDirectlyToOrderRepo(order1);
         shopService.addOrderDirectlyToOrderRepo(order2);
 
-        List<Order> actual = shopService.getOrdersByOrderStatus(OrderStatus.PROCESSING);
-
+        // When
         OrderStatus expectedStatus = OrderStatus.PROCESSING;
-        assertEquals(expectedStatus, actual.getFirst().orderStatus());
+
+        List<Order> actual = shopService.getOrdersByOrderStatus(expectedStatus);
+        OrderStatus actualOrderStatus = actual.getFirst().orderStatus();
+
+        // Then
+        assertEquals(expectedStatus, actualOrderStatus);
     }
 }

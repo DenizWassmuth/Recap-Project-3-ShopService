@@ -1,3 +1,4 @@
+
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -39,10 +40,10 @@ public class ShopService {
         return orderRepo.getOrders().stream().filter(order -> order.orderStatus() == orderStatus).toList();
     }
 
-    public void addOrderDirectlyToOrderRepo(Order order)
-    {
-        orderRepo.addOrder(order);
-    }
+//    public void addOrderDirectlyToOrderRepo(Order order)
+//    {
+//        orderRepo.addOrder(order);
+//    }
 
     public Order updateOrder(String orderId, OrderStatus orderStatus){
 

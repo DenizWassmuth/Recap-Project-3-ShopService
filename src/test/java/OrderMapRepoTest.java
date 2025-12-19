@@ -44,7 +44,7 @@ class OrderMapRepoTest {
         Product product1 = new Product("1", "Apfel");
         Order expected = new Order("1", List.of(product1), OrderStatus.PROCESSING);
 
-        assertEquals(actual, expected);
+        assertEquals(actual.get(), expected);
     }
 
     @Test

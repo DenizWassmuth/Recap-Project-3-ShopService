@@ -60,14 +60,24 @@ class ShopServiceTest {
     }
 
     @Test
-    void updateOrder_expectNull(){
+    void updateOrder_throwsOrderDoesNotExistException() {
 
         ShopService shopService = new ShopService();
-        Order actual = shopService.updateOrder("1", OrderStatus.IN_DELIVERY);
 
-        Order expected = null;
+        assertThrows(ProductDoesNotExistException.class, () -> shopService.updateOrder("1", OrderStatus.IN_DELIVERY));
+    }
 
-        assertEquals(expected, actual);
-        assertNull(actual);
+    @Test
+    void updateOrder_doesNotThrowException(){
+        ShopService shopService = new ShopService();
+
+        Order newOrder = new Order("1", List.of(new Product("1", "Birne")), OrderStatus.PROCESSING);
+        shopService.addOrderDirectlyToOrderRepo(newOrder);
+
+        Order expectedUpdatedOrder = newOrder.withOrderStatus(OrderStatus.IN_DELIVERY);
+        Order actualUpdatedOrder = shopService.updateOrder("1", OrderStatus.IN_DELIVERY);
+
+        assertDoesNotThrow(() -> shopService.updateOrder("1", OrderStatus.IN_DELIVERY));
+        assertEquals(expectedUpdatedOrder, actualUpdatedOrder);
     }
 }

@@ -7,6 +7,13 @@ class IdServiceTest {
     @Test
     void generateRandomId() {
         IdService idService = new IdService();
-        assertNotNull(idService.generateRandomId());
+
+        String randomId = idService.generateRandomId();
+        boolean expected = true;
+
+        boolean actual = !randomId.isEmpty();
+
+        assertEquals(expected, actual);
+        //assertNotNull(idService.generateRandomId());
     }
 }
